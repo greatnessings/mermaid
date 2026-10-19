@@ -113,6 +113,20 @@ const getActors = function() {
   return updateActors();
 };
 
+export const getJourneySummary = function() {
+  const compiled = getTasks();
+  const actors = getActors();
+  const scores = compiled.map(t => Number(t.score)).filter(n => Number.isFinite(n));
+  const meanScore = scores.length > 0 ? Number((scores.reduce((a, b) => a + b, 0) / scores.length).toFixed(4)) : 0;
+  return {
+    title: getTitle(),
+    sectionCount: sections.length,
+    taskCount: compiled.length,
+    actorCount: actors.length,
+    meanScore
+  };
+};
+
 export default {
   clear,
   setTitle,
@@ -122,5 +136,6 @@ export default {
   getTasks,
   addTask,
   addTaskOrg,
-  getActors
+  getActors,
+  getJourneySummary
 };
