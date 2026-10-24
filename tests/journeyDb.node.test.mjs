@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import journeyDb, { getJourneySummary } from './journeyDb.js';
+import journeyDb, { getJourneySummary } from '../src/diagrams/user-journey/journeyDb.js';
 
 test('getJourneySummary aggregates sections, tasks, deduplicated actors, and mean score', () => {
   journeyDb.clear();

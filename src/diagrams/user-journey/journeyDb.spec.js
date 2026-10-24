@@ -100,6 +100,18 @@ describe('when using the journeyDb', function() {
       expect(journeyDb.getActors()).toEqual(['Alice', 'Bob', 'Charlie']);
       expect(journeyDb.getTasks()).toHaveLength(2);
     });
+    it('computes journey summary metrics via getJourneySummary', function() {
+      journeyDb.setTitle('Onboarding Journey');
+      journeyDb.addSection('Signup');
+      journeyDb.addTask('Create account', ':5: Alice, Bob');
+      journeyDb.addTask('Verify email', ':3: Alice, Charlie');
+      expect(journeyDb.getJourneySummary()).toEqual({
+        title: 'Onboarding Journey',
+        sectionCount: 1,
+        taskCount: 2,
+        actorCount: 3,
+        meanScore: 4
+      });
+    });
   });
 });
-
